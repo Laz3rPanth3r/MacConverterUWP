@@ -30,6 +30,7 @@ namespace MacConverterUWP
         {
             this.InitializeComponent();
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 400, Width = 400 };
+            
         }
 
         private string RemoveUnwantedCharacters(string input, IEnumerable<char> allowedCharacters)
