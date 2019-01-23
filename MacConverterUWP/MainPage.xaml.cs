@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.AccessCache;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -223,11 +224,8 @@ namespace MacConverterUWP
                 }
             }
 
-            System.IO.File.WriteAllLines(outfile, results);
-
-            string sometext = System.IO.File.ReadAllText(outfile);
-
-            resultBoxTxt.Text = sometext;
+            var outPut = String.Join("\n", results.ToArray());
+            resultBoxTxt.Text = outPut;
 
         }
 
