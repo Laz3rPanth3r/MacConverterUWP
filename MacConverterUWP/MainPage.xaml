@@ -12,20 +12,41 @@
         <Pivot.Items>
             <PivotItem Header="Single">
                 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Wide">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="800" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Target="radStack.Orientation"  Value="Horizontal" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Narrow">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="0" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Target="radStack.Orientation"  Value="Vertical"  />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+
+                    </VisualStateManager.VisualStateGroups>
                     <RelativePanel>
                         <TextBlock x:Name="macTxtBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center" Width="210" Margin="0,22,0,0">Mac Address</TextBlock>
                         <TextBox RelativePanel.Below="macTxtBlk" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="macTxt" TabIndex="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Calibri" Width="210" Margin="0,44,0,0" VerticalAlignment="Top" PlaceholderText="mac address"/>
                         <TextBlock RelativePanel.Below="macTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="outTxtBlk" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center" Width="210" Margin="0,27,0,0">Select Output Format:</TextBlock>
-
-                        <StackPanel x:Name="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="outTxtBlk" Orientation="Vertical" Margin="86,34,86,376">
+                        <StackPanel x:Name="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="outTxtBlk" Orientation="Vertical" VerticalAlignment="Stretch" >
                             <RadioButton x:Name="radDash"  GroupName="outputType" TabIndex="2" IsChecked="True">11-22-33-AA-BB-CC</RadioButton>
                             <RadioButton x:Name="radColon" GroupName="outputType" TabIndex="3">11:22:33:aa:bb:cc</RadioButton>
                             <RadioButton x:Name="rad4Dot" GroupName="outputType" TabIndex="4" >1122.33aa.bbcc</RadioButton>
                         </StackPanel>
 
-                        <TextBox RelativePanel.Below="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="resultTxt" TabIndex="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Top" Width="250" FontSize="15" FontFamily="Calibri" PlaceholderText="Conversion Results" Margin="0,-211,0,0"/>
 
-                        <Button RelativePanel.Below="resultTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="convertSingle"  TabIndex="6" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Width="147" Click="ConvertSingle_Click"  FontSize="14" RenderTransformOrigin="0.482,-1.548" Margin="0,-119,0,0"/>
+                        <TextBox RelativePanel.Below="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="resultTxt" TabIndex="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Top" Width="250" FontSize="15" FontFamily="Calibri" PlaceholderText="Conversion Results" Margin="0,46,0,0"/>
+
+                        <Button RelativePanel.Below="resultTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="convertSingle"  TabIndex="6" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Width="147" Click="ConvertSingle_Click"  FontSize="14" RenderTransformOrigin="0.482,-1.548" Margin="0,55,0,0"/>
                     </RelativePanel>
                 </Grid>
 
@@ -33,10 +54,10 @@
             <PivotItem Header="Batch">
                 <Grid Name="batchGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <RelativePanel x:Name="batchPanel">
-                        <TextBlock x:Name="srcTxtBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center"  Margin="0,22,0,0" FontWeight="Bold"/>
+                        <TextBlock x:Name="srcTxtBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center" Width="210" Margin="0,22,0,0" FontWeight="Bold"/>
                         <Button x:Name="Browser_Button1"  Content="Select MAC List" RelativePanel.Below="srcTxtBlk" RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" Width="150" Click="Browser1_Button_ClickAsync" HorizontalAlignment="Center" Margin="0,5,0,0" />
                         <Button x:Name="Browser_Button2"  Content="Select File Output"   RelativePanel.Below="Browser_Button1"  RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" Width="150" Click="Browser2_Button_ClickAsync" HorizontalAlignment="Center" Margin="0,15,0,0" />
-                        <TextBlock x:Name="outTxtBlock" RelativePanel.Below="Browser_Button2"  RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Stretch" />
+                        <TextBlock x:Name="outTxtBlock" RelativePanel.Below="Browser_Button2"  RelativePanel.AlignHorizontalCenterWithPanel="True" VerticalAlignment="Top" Width="147" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Stretch" />
                         <StackPanel x:Name="radStack2" RelativePanel.Below="outTxtBlock" RelativePanel.AlignHorizontalCenterWithPanel="True">
                             <RadioButton x:Name="radDash2" GroupName="batchOutputType" TabIndex="2"  IsChecked="True">11-22-33-AA-BB-CC</RadioButton>
                             <RadioButton x:Name="radColon2" GroupName="batchOutputType" TabIndex="3" >11:22:33:aa:bb:cc</RadioButton>
