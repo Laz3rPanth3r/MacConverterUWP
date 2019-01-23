@@ -162,22 +162,6 @@ namespace MacConverterUWP
 
         }
 
-        private async void Browser2_Button_ClickAsync(object sender, RoutedEventArgs e)
-        {
-
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            picker.FileTypeFilter.Add(".txt");
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            if (file != null)
-            {
-                _outfile = file.Path;
-                outTxtBlock.Text = outfile;
-            }
-           
-        }
-
         private void Convert_macs_button_Click(object sender, RoutedEventArgs e)
         {
 
