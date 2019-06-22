@@ -43,10 +43,11 @@
                             <RadioButton x:Name="radDash"  GroupName="outputType" TabIndex="2" IsChecked="True">11-22-33-AA-BB-CC</RadioButton>
                             <RadioButton x:Name="radColon" GroupName="outputType" TabIndex="3">11:22:33:aa:bb:cc</RadioButton>
                             <RadioButton x:Name="rad4Dot" GroupName="outputType" TabIndex="4" >1122.33aa.bbcc</RadioButton>
+                            <RadioButton x:Name="radnone" GroupName="outputType" TabIndex="4" >112233aabbcc</RadioButton>
                         </StackPanel>
 
 
-                        <TextBox RelativePanel.Below="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="resultTxt" TabIndex="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Top" Width="250" FontSize="15" FontFamily="Calibri" PlaceholderText="Conversion Results" Margin="0,46,0,0"/>
+                        <TextBox RelativePanel.Below="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="resultTxt" TabIndex="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Top" Width="210" FontSize="15" FontFamily="Calibri" PlaceholderText="Conversion Results" Margin="0,46,0,0"/>
 
                         <Button RelativePanel.Below="resultTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="convertSingle"  TabIndex="6" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Width="147" Click="ConvertSingle_Click"  FontSize="14" RenderTransformOrigin="0.482,-1.548" Margin="0,55,0,0"/>
                     </RelativePanel>

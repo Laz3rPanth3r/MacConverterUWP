@@ -95,6 +95,17 @@ namespace MacConverterUWP
 );
         }
 
+        private async void none_to_clear(object obj)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+                inputMac = macTxt.Text;
+                string filteredString = RemoveUnwantedCharacters(inputMac, allowedCharacters);
+                outputMac = filteredString;
+                resultTxt.Text = outputMac;
+            }
+);
+        }
+
         private async void ConvertSingle_Click(object sender, RoutedEventArgs e)
         {
 
@@ -123,6 +134,13 @@ namespace MacConverterUWP
             if (rad4Dot.IsChecked == true)
             {
                 Thread thread = new Thread(none_to_4dot);
+                thread.IsBackground = true;
+                thread.Start();
+            }
+
+            if (radnone.IsChecked == true)
+            {
+                Thread thread = new Thread(none_to_clear);
                 thread.IsBackground = true;
                 thread.Start();
             }
