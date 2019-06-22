@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -30,8 +31,10 @@ namespace MacConverterUWP
         public MainPage()
         {
             this.InitializeComponent();
-            ApplicationView.PreferredLaunchViewSize = new Size { Height = 400, Width = 400 };
-            
+            ApplicationView.PreferredLaunchViewSize = new Size(600, 600);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+
         }
 
         private string RemoveUnwantedCharacters(string input, IEnumerable<char> allowedCharacters)
@@ -50,6 +53,8 @@ namespace MacConverterUWP
         public string outputMac { get; set; }
 
         public string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        #region Single Mac
 
         private async void none_to_2dash(object obj)
 
@@ -146,7 +151,7 @@ namespace MacConverterUWP
             }
 
         }
-
+        #endregion
 
         #region Batch Pivot
         private string _sourcefile = null;
@@ -165,6 +170,8 @@ namespace MacConverterUWP
             set { _outfile = value; }
         }
 
+        public Windows.Storage.StorageFile PickedFile { get; set; }
+
         private async void Browser1_Button_ClickAsync(object sender, RoutedEventArgs e)
         {
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
@@ -176,20 +183,25 @@ namespace MacConverterUWP
             {
                 _sourcefile = file.Path;
                 srcTxtBlk.Text = sourcefile;
+                var mru = StorageApplicationPermissions.MostRecentlyUsedList;
+                string mruToken = mru.Add(file, file.Name);
+                PickedFile = file;
             }
 
         }
 
-        private void Convert_macs_button_Click(object sender, RoutedEventArgs e)
+        private async void none_to_2dash_batch(object obj)
         {
-
-
-            List<string> results = new List<string>();
-
-            foreach (string line in File.ReadLines(sourcefile))
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                if (radDash2.IsChecked == true)
+                List<string> results = new List<string>();
+
+                var input = await FileIO.ReadTextAsync(PickedFile);
+                string[] read = input.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string line in read)
                 {
+
                     inputMac = line;
                     string filteredString = RemoveUnwantedCharacters(inputMac, allowedCharacters);
                     filteredString = filteredString.Insert(2, "-");
@@ -202,9 +214,26 @@ namespace MacConverterUWP
 
                 }
 
-                if (radColon2.IsChecked == true)
+                var outPut = String.Join("\n", results.ToArray());
+                resultBoxTxt.Text = outPut;
+                ScrollViewer.SetVerticalScrollBarVisibility(resultBoxTxt, ScrollBarVisibility.Auto);
+
+            });
+        }
+
+        private async void none_to_2Colon_batch(object obj)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                List<string> results = new List<string>();
+
+                string input = await FileIO.ReadTextAsync(PickedFile);
+                string[] read = input.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string line in read)
                 {
-                    inputMac = line;
+
+                    inputMac = line.ToString();
                     string filteredString = RemoveUnwantedCharacters(inputMac, allowedCharacters);
                     filteredString = filteredString.Insert(2, ":");
                     filteredString = filteredString.Insert(5, ":");
@@ -213,26 +242,117 @@ namespace MacConverterUWP
                     filteredString = filteredString.Insert(14, ":");
                     outputMac = filteredString;
                     results.Add(outputMac);
+
                 }
 
-                if (rad4Dot2.IsChecked == true)
+                var outPut = String.Join("\n", results.ToArray());
+                resultBoxTxt.Text = outPut;
+                ScrollViewer.SetVerticalScrollBarVisibility(resultBoxTxt, ScrollBarVisibility.Auto);
+
+            });
+        }
+
+        private async void none_to_2dot_batch(object obj)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                List<string> results = new List<string>();
+
+                string input = await FileIO.ReadTextAsync(PickedFile);
+                string[] read = input.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string line in read)
                 {
-                    inputMac = line;
+
+                    inputMac = line.ToString();
                     string filteredString = RemoveUnwantedCharacters(inputMac, allowedCharacters);
                     filteredString = filteredString.Insert(4, ".");
                     filteredString = filteredString.Insert(9, ".");
                     outputMac = filteredString;
                     results.Add(outputMac);
+
                 }
-            }
 
-            var outPut = String.Join("\n", results.ToArray());
-            resultBoxTxt.Text = outPut;
+                var outPut = String.Join("\n", results.ToArray());
+                resultBoxTxt.Text = outPut;
+                ScrollViewer.SetVerticalScrollBarVisibility(resultBoxTxt, ScrollBarVisibility.Auto);
 
+            });
+        }
+
+        private async void none_to_clear_batch(object obj)
+
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                List<string> results = new List<string>();
+
+                string input = await FileIO.ReadTextAsync(PickedFile);
+                string[] read = input.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string line in read)
+                {
+
+                    inputMac = line.ToString();
+                    string filteredString = RemoveUnwantedCharacters(inputMac, allowedCharacters);
+                    outputMac = filteredString;
+                    results.Add(outputMac);
+
+                }
+
+                var outPut = String.Join("\n", results.ToArray());
+                resultBoxTxt.Text = outPut;
+                ScrollViewer.SetVerticalScrollBarVisibility(resultBoxTxt, ScrollBarVisibility.Auto);
+
+            });
         }
 
 
-        #endregion
+        private async void Convert_macs_button_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(srcTxtBlk.Text))
+                {
+                var dialog = new MessageDialog("Missing" +
+                    " MAC file, check data entry");
+                await dialog.ShowAsync();
+                return;
+                }
+
+            if (radDash2.IsChecked == true)
+                {
+                    Thread thread = new Thread(none_to_2dash_batch);
+                    thread.IsBackground = true;
+                    thread.Start();
+                }
+
+            if (radColon2.IsChecked == true)
+                {
+                Thread thread = new Thread(none_to_2Colon_batch);
+                thread.IsBackground = true;
+                thread.Start();
+                }
+
+            if (rad4Dot2.IsChecked == true)
+                {
+                Thread thread = new Thread(none_to_2dot_batch);
+                thread.IsBackground = true;
+                thread.Start();
+                }
+
+           if (radNone2.IsChecked == true)
+                {
+                Thread thread = new Thread(none_to_clear_batch);
+                thread.IsBackground = true;
+                thread.Start();
+            }
+        }
+
+
 
     }
+
+
+
+    #endregion
+
 }
