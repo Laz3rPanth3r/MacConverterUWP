@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="1869e508-1d17-42eb-b106-570ac270facd" Publisher="CN=Michael.Becker" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="1869e508-1d17-42eb-b106-570ac270facd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="62349LazerPanther.MacConverter" Publisher="CN=7C896172-9EFD-4C29-8B9A-3F112FE377EF" Version="2.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="80f9e65a-7c01-4487-8355-aa19374622f1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>MacConverterUWP</DisplayName>
-    <PublisherDisplayName>Michael.Becker</PublisherDisplayName>
+    <DisplayName>MacConverter</DisplayName>
+    <PublisherDisplayName>LazerPanther</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -16,6 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MacConverterUWP.App">
       <uap:VisualElements DisplayName="MacConverter" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Converts single MAC address' to different formats. Also supports loading a text file of multiple MAC address' and converting to requested format." BackgroundColor="transparent">
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
