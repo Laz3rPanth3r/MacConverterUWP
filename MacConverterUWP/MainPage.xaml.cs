@@ -31,7 +31,7 @@ namespace MacConverterUWP
         public MainPage()
         {
             this.InitializeComponent();
-            ApplicationView.PreferredLaunchViewSize = new Size(600, 600);
+            ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
 

@@ -49,7 +49,7 @@
 
                         <TextBox RelativePanel.Below="radStack" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="resultTxt" TabIndex="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Top" Width="210" FontSize="15" FontFamily="Calibri" PlaceholderText="Conversion Results" Margin="0,46,0,0"/>
 
-                        <Button RelativePanel.Below="resultTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="convertSingle"  TabIndex="6" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Width="147" Click="ConvertSingle_Click"  FontSize="14" RenderTransformOrigin="0.482,-1.548" Margin="0,55,0,0"/>
+                        <Button RelativePanel.Below="resultTxt" RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="convertSingle"  TabIndex="6" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Width="147" Click="ConvertSingle_Click"  FontSize="14" RenderTransformOrigin="0.482,-1.548" Margin="0,30,0,0"/>
                     </RelativePanel>
                 </Grid>
 
@@ -75,10 +75,17 @@
             </PivotItem>
             <PivotItem Header="About">
                 <Grid Name="aboutGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-                    <TextBlock x:Name="aboutTxtBlk2" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center" TextWrapping="WrapWholeWords" >I made this cause our Network guy was annoyed by everyone wanting different MAC address formats.</TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock x:Name="aboutTxtBlk2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" HorizontalTextAlignment="Center" TextWrapping="WrapWholeWords" >I made this cause our Network guy was annoyed by everyone wanting different MAC address formats.</TextBlock>
 
-                    <Image Source="Assets\LargeTile.scale-400.png" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                    <TextBlock  x:Name="aboutTxtBlk"  FontFamily="Calibri" HorizontalTextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" VerticalAlignment="Bottom">(c) 2019 LazerPanther Software</TextBlock>
+                    <Image Source="MacConverter.png" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    
+                    <TextBlock  x:Name="aboutTxtBlk" Grid.Row="2" FontFamily="Calibri" HorizontalTextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" VerticalAlignment="Bottom">(c) 2019 LazerPanther Software</TextBlock>
 
                 </Grid>
             </PivotItem>
